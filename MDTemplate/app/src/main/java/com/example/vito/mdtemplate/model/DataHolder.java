@@ -3,8 +3,6 @@ package com.example.vito.mdtemplate.model;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import com.vito.myheritage.model.Response.Cursor;
-
 /**
  * As it is not defined to store data between app launches i'll use this Data
  * holder. This is basic data storage singleton with basic caching mechanism
@@ -21,7 +19,7 @@ public class DataHolder {
 	private static DataHolder _instance;
 	private String last_received_search_text = null;
 	private Hashtable<String, ArrayList<SearchResult>> mCache = new Hashtable();
-	private Cursor mCursor = null;
+	private Response.Cursor mCursor = null;
 	private static boolean isInitCalled = false;
 
 	/**
@@ -44,7 +42,7 @@ public class DataHolder {
 		return _instance;
 	}
 
-	public synchronized static void addNewResults(String search_text, ArrayList<SearchResult> results, Cursor cursor) {
+	public synchronized static void addNewResults(String search_text, ArrayList<SearchResult> results, Response.Cursor cursor) {
 		if (!isInitCalled)
 			throw new IllegalStateException("DataHolder: init() should be called first...");
 		ArrayList<SearchResult> data = _instance.mCache.get(search_text);

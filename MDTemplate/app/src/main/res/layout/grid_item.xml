@@ -5,7 +5,7 @@
     android:layout_margin="2.5dp"
     android:background="@android:drawable/dialog_frame">
 
-    <ImageView
+    <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/imageView"
         android:layout_width="150dp"
         android:layout_height="150dp"

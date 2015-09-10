@@ -1,25 +1,23 @@
 package com.example.vito.mdtemplate.controller;
 
-import java.util.ArrayList;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.vito.myheritage.R;
-import com.vito.myheritage.model.SearchResult;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
+
+import com.android.volley.toolbox.NetworkImageView;
+import com.example.vito.mdtemplate.R;
+import com.example.vito.mdtemplate.model.SearchResult;
+
+import java.util.ArrayList;
 
 public class GridViewAdapter extends ArrayAdapter<SearchResult> {
 
     private Context context;
     private int layoutResourceId;
-    private ArrayList<SearchResult> data = new ArrayList<SearchResult>();
+    private ArrayList<SearchResult> data = new ArrayList<>();
 
     public GridViewAdapter(Context context, int layoutResourceId, ArrayList<SearchResult> data) {
         super(context, layoutResourceId, data);
@@ -37,7 +35,7 @@ public class GridViewAdapter extends ArrayAdapter<SearchResult> {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new ViewHolder();
-            holder.image = (ImageView) row.findViewById(R.id.imageView);
+            holder.image = (NetworkImageView) row.findViewById(R.id.imageView);
             row.setTag(holder);
         } else {
             holder = (ViewHolder) row.getTag();
@@ -45,12 +43,11 @@ public class GridViewAdapter extends ArrayAdapter<SearchResult> {
 
 
         SearchResult item = data.get(position);
-        holder.image.setImageResource(R.drawable.anim_loading);
-        ImageLoader.getInstance().displayImage(item.unescapedUrl, holder.image);
+        holder.image.setImageUrl(item.unescapedUrl,VolleySingleton.getInstance().getImageLoader());
         return row;
     }
 
     static class ViewHolder {
-        ImageView image;
+        NetworkImageView image;
     }
 }

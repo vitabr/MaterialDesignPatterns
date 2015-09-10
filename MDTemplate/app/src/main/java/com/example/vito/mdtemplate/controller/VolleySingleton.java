@@ -4,7 +4,6 @@ package com.example.vito.mdtemplate.controller;
  * Created by Vito on 10.09.2015.
  */
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
 
@@ -45,6 +44,5 @@ public class VolleySingleton {
     public ImageLoader getImageLoader(){
         return this.mImageLoader;
     }
-
 }
 
